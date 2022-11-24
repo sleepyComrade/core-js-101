@@ -27,9 +27,19 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
-}
+const getFizzBuzz = (num) => {
+  let res;
+  const fizz = num % 3 === 0;
+  const buzz = num % 5 === 0;
+  if (fizz && buzz) {
+    res = 'FizzBuzz';
+  } else if (fizz) {
+    res = 'Fizz';
+  } else if (buzz) {
+    res = 'Buzz';
+  } else res = num;
+  return res;
+};
 
 
 /**
@@ -43,9 +53,13 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
-}
+const getFactorial = (n) => {
+  let count = 1;
+  for (let i = 2; i <= n; i += 1) {
+    count *= i;
+  }
+  return count;
+};
 
 
 /**
@@ -60,9 +74,13 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
-}
+const getSumBetweenNumbers = (n1, n2) => {
+  let count = 0;
+  for (let i = n1; i <= n2; i += 1) {
+    count += i;
+  }
+  return count;
+};
 
 
 /**
@@ -164,10 +182,23 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
+const findFirstSingleChar = (/* str */) => {
   throw new Error('Not implemented');
-}
-
+  // const arr = str.split('');
+  // let res = null;
+  // for (let i = 0; i < arr.length; i += 1) {
+  //   for (let j = 0; j < arr.length; j += 1) {
+  //     if (arr[i] === arr[j] && i !== j) {
+  //       break;
+  //     }
+  //     res = arr[i];
+  //   }
+  //   if (res !== null) {
+  //     break;
+  //   }
+  // }
+  // return res;
+};
 
 /**
  * Returns the string representation of math interval,
