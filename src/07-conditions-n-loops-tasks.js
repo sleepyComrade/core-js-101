@@ -98,9 +98,24 @@ const getSumBetweenNumbers = (n1, n2) => {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
-}
+const isTriangle = (a, b, c) => {
+  let bool = false;
+  let max = a;
+  let side1;
+  let side2;
+  if (b > a) {
+    max = b;
+    side1 = a;
+  } else side1 = b;
+  if (c > max) {
+    side2 = max;
+    max = c;
+  } else side2 = c;
+  if (side1 + side2 > max) {
+    bool = true;
+  }
+  return bool;
+};
 
 
 /**
@@ -135,9 +150,18 @@ function isTriangle(/* a, b, c */) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
-}
+const doRectanglesOverlap = (rect1, rect2) => {
+  let bool = false;
+  const difTop = Math.abs(rect1.top - rect2.top);
+  const difLeft = Math.abs(rect1.left - rect2.left);
+  if (difTop < rect1.height && difLeft < rect1.width) {
+    bool = true;
+  }
+  if (difTop < rect2.height && difLeft < rect2.width) {
+    bool = true;
+  }
+  return bool;
+};
 
 
 /**
@@ -166,9 +190,31 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
-}
+const isInsideCircle = (circle, point) => {
+  if (circle.center.x === point.x && circle.center.y === point.y) {
+    return true;
+  }
+  let bool = false;
+  const difTop = Math.abs(circle.center.y - point.y);
+  const difLeft = Math.abs(circle.center.x - point.x);
+  if (circle.center.x !== point.x && circle.center.y !== point.y) {
+    const length = Math.sqrt(difTop ** 2 + difLeft ** 2);
+    if (length < circle.radius) {
+      bool = true;
+    }
+  }
+  if (circle.center.x !== point.x && circle.center.y === point.y) {
+    if (difLeft < circle.radius) {
+      bool = true;
+    }
+  }
+  if (circle.center.x === point.x && circle.center.y !== point.y) {
+    if (difTop < circle.radius) {
+      bool = true;
+    }
+  }
+  return bool;
+};
 
 
 /**
@@ -182,22 +228,22 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-const findFirstSingleChar = (/* str */) => {
-  throw new Error('Not implemented');
-  // const arr = str.split('');
-  // let res = null;
-  // for (let i = 0; i < arr.length; i += 1) {
-  //   for (let j = 0; j < arr.length; j += 1) {
-  //     if (arr[i] === arr[j] && i !== j) {
-  //       break;
-  //     }
-  //     res = arr[i];
-  //   }
-  //   if (res !== null) {
-  //     break;
-  //   }
-  // }
-  // return res;
+const findFirstSingleChar = (str) => {
+  const res = [];
+  const array = str.split('');
+  let arr = [];
+  for (let i = 0; i < array.length; i += 1) {
+    arr = [];
+    for (let j = 0; j < array.length; j += 1) {
+      if (array[i] === array[j] && array[i] !== ' ') {
+        arr.push(array[i]);
+      }
+    }
+    if (arr.length === 1) {
+      res.push(arr[0]);
+    }
+  }
+  return res[0] ? res[0] : null;
 };
 
 /**
@@ -239,9 +285,7 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
-}
+const reverseString = (str) => str.split('').reverse().join('');
 
 
 /**
@@ -256,9 +300,7 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
-}
+const reverseInteger = (num) => +(num.toString().split('').reverse().join(''));
 
 
 /**
@@ -299,10 +341,13 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
-}
-
+const getDigitalRoot = (num) => {
+  let sum = num;
+  while (sum > 9) {
+    sum = sum.toString().split('').map((el) => +el).reduce((a, b) => a + b);
+  }
+  return sum;
+};
 
 /**
  * Returns true if the specified string has the balanced brackets and false otherwise.
