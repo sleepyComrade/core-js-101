@@ -42,9 +42,7 @@ const getComposition = (f, g) => (x) => f(g(x));
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
-}
+const getPowerFunction = (exponent) => (n) => n ** exponent;
 
 
 /**

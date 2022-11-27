@@ -370,8 +370,22 @@ const getDigitalRoot = (num) => {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const brackets = [['[', ']'], ['(', ')'], ['{', '}'], ['<', '>']];
+  const arr = str.split('');
+  const stack = [];
+  arr.forEach((el) => {
+    stack.push(el);
+    if (stack.length > 1) {
+      brackets.forEach((elem) => {
+        if (elem[0] === stack[stack.length - 2] && elem[1] === stack[stack.length - 1]) {
+          stack.pop();
+          stack.pop();
+        }
+      });
+    }
+  });
+  return !stack.length;
 }
 
 
@@ -410,10 +424,33 @@ const toNaryString = (num, n) => num.toString(n);
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const arrays = pathes.map((el) => el.split('/'));
+  const common = [];
+  let { length } = arrays[0];
+  let maxLength = arrays[0].length;
+  arrays.forEach((el) => {
+    if (length > el.length) {
+      length = el.length;
+    } else maxLength = el.length;
+  });
+  for (let i = 0; i < length; i += 1) {
+    const str = arrays[0][i];
+    let areSame = true;
+    arrays.forEach((el) => {
+      if (el[i] !== str) {
+        areSame = false;
+      }
+    });
+    if (areSame) {
+      common.push(str);
+    }
+  }
+  if (maxLength > common.length) {
+    common.push('');
+  }
+  return common.join('/');
 }
-
 
 /**
  * Returns the product of two specified matrixes.
