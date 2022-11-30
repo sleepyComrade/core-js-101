@@ -268,9 +268,15 @@ const findFirstSingleChar = (str) => {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
-}
+const getIntervalString = (a, b, isStartIncluded, isEndIncluded) => {
+  const arr = [];
+  arr.push(isStartIncluded ? '[' : '(');
+  arr.push(a > b ? b : a);
+  arr.push(', ');
+  arr.push(a > b ? a : b);
+  arr.push(isEndIncluded ? ']' : ')');
+  return arr.join('');
+};
 
 
 /**
