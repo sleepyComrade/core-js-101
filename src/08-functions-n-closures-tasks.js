@@ -107,7 +107,7 @@ const retry = (func, attempts) => () => {
     try {
       n = func();
     } catch (error) {
-      console.log(error.message);
+      n = error.message;
     }
   }
   return n;
