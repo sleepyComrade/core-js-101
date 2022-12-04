@@ -329,9 +329,22 @@ const reverseInteger = (num) => +(num.toString().split('').reverse().join(''));
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
-}
+const isCreditCardNumber = (ccn) => ccn.toString().split('').map((el) => +el).map((el, i, arr) => {
+  let num;
+  if (arr.length % 2 === 0) {
+    if (i % 2 === 0) {
+      if (el * 2 > 9) {
+        num = el * 2 - 9;
+      } else num = el * 2;
+    } else num = el;
+  } else if (i % 2 !== 0) {
+    if (el * 2 > 9) {
+      num = el * 2 - 9;
+    } else num = el * 2;
+  } else num = el;
+  return num;
+})
+  .reduce((a, b) => a + b) % 10 === 0;
 
 /**
  * Returns the digital root of integer:
@@ -376,7 +389,7 @@ const getDigitalRoot = (num) => {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(str) {
+const isBracketsBalanced = (str) => {
   const brackets = [['[', ']'], ['(', ')'], ['{', '}'], ['<', '>']];
   const arr = str.split('');
   const stack = [];
@@ -392,7 +405,7 @@ function isBracketsBalanced(str) {
     }
   });
   return !stack.length;
-}
+};
 
 
 /**
@@ -430,7 +443,7 @@ const toNaryString = (num, n) => num.toString(n);
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(pathes) {
+const getCommonDirectoryPath = (pathes) => {
   const arrays = pathes.map((el) => el.split('/'));
   const common = [];
   let { length } = arrays[0];
@@ -456,7 +469,7 @@ function getCommonDirectoryPath(pathes) {
     common.push('');
   }
   return common.join('/');
-}
+};
 
 /**
  * Returns the product of two specified matrixes.
@@ -476,7 +489,7 @@ function getCommonDirectoryPath(pathes) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(m1, m2) {
+const getMatrixProduct = (m1, m2) => {
   const matrix = [];
   m1.forEach((el) => {
     const arr = [];
@@ -487,7 +500,7 @@ function getMatrixProduct(m1, m2) {
     matrix.push(arr);
   });
   return matrix;
-}
+};
 
 
 /**
@@ -520,7 +533,7 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(position) {
+const evaluateTicTacToePosition = (position) => {
   let res;
   for (let i = 0; i < position.length; i += 1) {
     if (position[i][0] === '0' && position[i][1] === '0' && position[i][2] === '0') {
@@ -547,7 +560,7 @@ function evaluateTicTacToePosition(position) {
     res = '0';
   }
   return res;
-}
+};
 
 
 module.exports = {
