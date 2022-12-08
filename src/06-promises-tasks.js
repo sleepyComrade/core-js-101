@@ -94,8 +94,18 @@ const getFastestPromise = (array) => Promise.race(array);
  *    });
  *
  */
-const chainPromises = (/* array, action */) => {
-  throw new Error('Not implemented');
+const chainPromises = (array, action) => {
+  const nums = [];
+  return new Promise((res) => {
+    array.forEach((el, i, arr) => {
+      el.then((num) => {
+        nums.push(num);
+        if (i === arr.length - 1) {
+          res(nums.reduce(action));
+        }
+      }).catch((error) => error);
+    });
+  });
 };
 
 module.exports = {
